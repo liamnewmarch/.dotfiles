@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+local _session='%{$fg_bold[red]%}session%{$reset_color%}'
+local _user='%{$fg_bold[blue]%}%n%{$reset_color%}'
+local _host='%{$fg_bold[magenta]%}%m%{$reset_color%}'
+
+print -P "New ${_session} as ${_user} on ${_host}"
