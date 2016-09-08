@@ -24,7 +24,6 @@ pathdirs=(
 
 plugins=(
     atom
-    autoenv
     bower
     brew
     brew-cask
