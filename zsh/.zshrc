@@ -84,6 +84,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 alias chrome='open -a "Google Chrome"'
 alias chrome-as='open -a "Google Chrome" --args --profile-directory'
+alias gpuo='git push -u origin $(git rev-parse --abbrev-ref head)'
 alias grun='git run'
 alias serve='python -m SimpleHTTPServer'
 alias vi='vim'
