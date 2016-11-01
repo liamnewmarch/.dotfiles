@@ -104,3 +104,12 @@ source "$GOOGLE_CLOUD_SDK/completion.zsh.inc"
 
 # Oh My Zsh
 source $ZSH/oh-my-zsh.sh
+
+# If tmux is not running
+if [[ -z "$TMUX" ]]; then
+    read '?Start tmux? [Y/n] ' yn
+    case $yn in
+        [Nn]*) ;; # Quit
+        *) tmux;; # Run tmux
+    esac
+fi
