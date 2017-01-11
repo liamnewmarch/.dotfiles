@@ -1,6 +1,7 @@
 # Liam’s oh-my-zsh theme, based on AVIT
 
-PROMPT='$(_user_host)${_current_dir} $(git_prompt_info) $(_ruby_version)
+PROMPT='
+$(_user_host)${_current_dir} $(git_prompt_info) $(_ruby_version)
 %{$fg[$CARETCOLOR]%}❖%{$reset_color%} '
 
 PROMPT2='%{$fg[$CARETCOLOR]%}»%{$reset_color%} '
@@ -72,11 +73,3 @@ export GREP_COLOR='1;33'
 if [[ -s $MOTD ]]; then
   source $MOTD
 fi
-
-function preexec() {
-  printf '\n'
-}
-
-function precmd() {
-  printf '\n\n'
-}

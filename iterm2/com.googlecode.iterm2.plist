@@ -5,7 +5,7 @@
 	<key>AdjustWindowForFontSizeChange</key>
 	<true/>
 	<key>AllowClipboardAccess</key>
-	<false/>
+	<true/>
 	<key>AlternateMouseScroll</key>
 	<true/>
 	<key>AnimateDimming</key>
@@ -538,7 +538,9 @@
 	<key>NSNavLastRootDirectory</key>
 	<string>~/.dotfiles/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
-	<string>{712, 448}</string>
+	<string>{712, 459}</string>
+	<key>NSNavPanelExpandedSizeForSaveMode</key>
+	<string>{712, 521}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -575,26 +577,22 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>271 552 224 325 0 0 1440 877 </string>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>929 97 460 116 0 0 1440 877 </string>
+	<string>383 1103 544 272 -199 900 1920 1080 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>239 404 606 456 0 0 1440 877 </string>
+	<string>325 204 924 485 0 0 1440 877 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>410 375 620 392 0 0 1440 878 </string>
+	<string>410 374 620 392 0 0 1440 878 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>308 1394 796 473 -348 900 1920 1058 </string>
+	<string>352 261 796 473 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>34 1079 762 549 -348 900 1920 1058 </string>
+	<string>344 260 650 477 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>277 1239 650 477 -348 900 1920 1058 </string>
+	<string>175 1120 970 657 -199 900 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>315 206 650 477 0 0 1440 878 </string>
-	<key>NSWindow Frame iTerm Window 3</key>
-	<string>460 93 650 477 0 0 1440 878 </string>
-	<key>NSWindow Frame iTerm Window 4</key>
-	<string>239 401 650 477 0 0 1440 878 </string>
-	<key>NSWindow Frame iTerm Window 5</key>
-	<string>260 399 650 477 0 0 1440 878 </string>
+	<string>456 180 850 621 0 0 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_70509CFB-2787-4F53-A33C-2E28758AE115</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -1331,31 +1329,22 @@
 			<string>/Users/liam</string>
 		</dict>
 	</array>
-	<key>NoSyncConfirmBeta</key>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
 	<true/>
-	<key>NoSyncHaveShownPromoWithId_4</key>
-	<true/>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
+	<integer>0</integer>
 	<key>NoSyncHaveWarnedAboutIncompatibleSoftware</key>
 	<true/>
-	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
-	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>B9E4E546-83F3-4D48-875E-553FF41F2B78</string>
-	<key>NoSyncLastTipTime</key>
-	<real>477570223.39785397</real>
+	<string>32F7B680-DC5E-44CB-8DB0-17A10BCCBEDC</string>
 	<key>NoSyncPermissionToShowTip</key>
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>477570182.74490303</real>
+	<real>491327474.98154902</real>
 	<key>NoSyncTimeOfLastPromo</key>
-	<real>477571189.61340499</real>
+	<real>466596616.75597697</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>486314293.020248</real>
-	<key>NoSyncTipsToNotShow</key>
-	<array>
-		<string>000</string>
-		<string>0000</string>
-	</array>
+	<real>470583791.69861603</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1404,7 +1393,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/liam/.dotfiles/iterm2</string>
+	<string>/Users/lnewmarch/.dotfiles/iterm2</string>
 	<key>PromptOnQuit</key>
 	<true/>
 	<key>QuitWhenAllWindowsClosed</key>
@@ -1414,15 +1403,15 @@
 	<key>RightOption</key>
 	<integer>3</integer>
 	<key>SUEnableAutomaticChecks</key>
-	<true/>
+	<false/>
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml?shard=51</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=85</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-11-07T15:54:00Z</date>
+	<date>2017-01-10T16:20:19Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1474,6 +1463,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.12</string>
+	<string>3.0.13</string>
 </dict>
 </plist>

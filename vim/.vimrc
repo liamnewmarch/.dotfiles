@@ -16,5 +16,8 @@ set mouse=a
 " Add shortcut to focus NERDTree
 map <silent> <C-t> :NERDTreeFocus<CR>
 
+" Disable soft tabs when editing make files
+autocmd FileType make setlocal noexpandtab
+
 " Auto open NERDTree
 " au VimEnter *  NERDTree
