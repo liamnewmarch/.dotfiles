@@ -10,10 +10,8 @@ pathdirs=(
     /usr/local/bin
     /usr/local/sbin
     /usr/local/bin/g4bin
-    $HOME/.n/bin
     $HOME/.gem/ruby/2.0.0/bin
-    $HOME/homebrew/bin
-    $HOME/npm-global/bin
+    $HOME/.homebrew/bin
     $HOME/bin
 )
 
@@ -37,6 +35,7 @@ plugins=(
     man
     node
     npm
+    nvm
     osx
     pep8
     pip
@@ -84,6 +83,8 @@ export ZSH=$HOME/.oh-my-zsh
 
 alias chrome='open -a "Google Chrome"'
 alias chrome-as='open -a "Google Chrome" --args --profile-directory'
+alias gam='commit -a --amend --no-edit'
+alias gd='git diff -- . ":(exclude)package-lock.json"'
 alias gpuo='git push -u origin $(git rev-parse --abbrev-ref head)'
 alias grun='git run'
 alias serve='python -m SimpleHTTPServer'
@@ -98,7 +99,7 @@ alias vi='vim'
 source '/usr/local/bin/virtualenvwrapper.sh'
 
 # Google Cloud SDK
-GOOGLE_CLOUD_SDK="$HOME/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
+GOOGLE_CLOUD_SDK="$HOME/.homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
 source "$GOOGLE_CLOUD_SDK/path.zsh.inc"
 source "$GOOGLE_CLOUD_SDK/completion.zsh.inc"
 
