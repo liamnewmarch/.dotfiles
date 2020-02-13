@@ -1,8 +1,8 @@
 # Liam’s oh-my-zsh theme, based on AVIT
 
 PROMPT='
-$(_user_host)${_current_dir} $(git_prompt_info) $(_ruby_version)
-%{$fg[$CARETCOLOR]%}❖%{$reset_color%} '
+$(_user_host)${_current_dir} $(git_prompt_info)
+%{$fg[$CARETCOLOR]%}$%{$reset_color%} '
 
 PROMPT2='%{$fg[$CARETCOLOR]%}»%{$reset_color%} '
 
@@ -36,14 +36,6 @@ function _vi_status() {
   fi
 }
 
-function _ruby_version() {
-  if {echo $fpath | grep -q "plugins/rvm"}; then
-    echo "%{$fg[grey]%}$(rvm_prompt_info)%{$reset_color%}"
-  elif {echo $fpath | grep -q "plugins/rbenv"}; then
-    echo "%{$fg[grey]%}$(rbenv_prompt_info)%{$reset_color%}"
-  fi
-}
-
 if [[ $USER == "root" ]]; then
   CARETCOLOR="red"
 else
@@ -70,6 +62,8 @@ export LS_COLORS='di=34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43
 export GREP_COLOR='1;33'
 
 # MOTD
-if [[ -s $MOTD ]]; then
-  source $MOTD
-fi
+session='%{$fg_bold[red]%}session%{$reset_color%}'
+user='%{$fg_bold[blue]%}%n%{$reset_color%}'
+host='%{$fg_bold[magenta]%}%m%{$reset_color%}'
+
+print -P "New $session as $user on $host"

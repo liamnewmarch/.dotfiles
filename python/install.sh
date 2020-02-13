@@ -1,2 +1,0 @@
-# Python
-brew install python

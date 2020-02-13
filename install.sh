@@ -2,43 +2,22 @@
 
 set -e
 
-standard_install=(
-  xcode
-  zsh
-  bin
-  brew
-  git
-  node
-  python
-  tmux
-  vim
-)
+# Create folders
+mkdir -p ~/bin
+mkdir -p ~/.oh-my-zsh/custom/themes
 
-function confirm_install() {
-  install=$1
-  while true; do
-    read -p "Run install script for $install? (y/n) " response
-    case $response in
-      [Yy]* )
-        source "$HOME/.dotfiles/$install/install.sh"
-        echo "End of $install install script."
-        break;;
-      [Nn]* )
-        break;;
-      * )
-        echo 'Please answer yes or no.';;
-    esac
-  done
-}
+# Link files
+ln -fs ~/.dotfiles/bin/ssh-copy-id ~/bin/ssh-copy-id
+ln -fs ~/.dotfiles/git/.gitignore ~/.gitignore
+ln -fs ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
+ln -fs ~/.dotfiles/vim/.vimrc ~/.vimrc
+ln -fs ~/.dotfiles/zsh/liam.zsh-theme ~/.oh-my-zsh/custom/themes
+ln -fs ~/.dotfiles/zsh/.zshrc ~/.zshrc
 
-if [[ -z "$1" ]]; then
-  # Standard installation.
-  for install in "${standard_install[@]}"; do
-    confirm_install "$install"
-  done
-  exit 0
-else
-  # Install one thing.
-  confirm_install "$1"
-  exit 0
+echo 'Installing Oh-my-Zsh.'
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+if [ $(uname -s) = "" ]; then
+  echo 'Installing Homebrew.'
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi

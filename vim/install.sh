@@ -1,14 +1,7 @@
-# Install vim
-brew install vim
-
 # Pathogen
 echo 'Installing Pathogen.'
 mkdir -p ~/.vim/autoload ~/.vim/bundle
 curl -LSso ~/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
-
-# .vimrc
-echo 'Symlinking .vimrc file.'
-ln -fs ~/.dotfiles/vim/.vimrc ~/.vimrc
 
 # Plugins
 echo 'Installing plugins.'

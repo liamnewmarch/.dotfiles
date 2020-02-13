@@ -13,6 +13,9 @@ set expandtab
 " Enable mouse
 set mouse=a
 
+" Enable shared clipboard
+"set clipboard=unnamed
+
 " Add shortcut to focus NERDTree
 map <silent> <C-t> :NERDTreeFocus<CR>
 
