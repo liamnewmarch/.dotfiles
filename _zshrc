@@ -66,6 +66,7 @@ done
 export EDITOR='vim'
 export PYTHONDONTWRITEBYTECODE="true"
 export UPDATE_ZSH_DAYS=7
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 
 
 ##
