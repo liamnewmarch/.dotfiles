@@ -88,8 +88,8 @@ if platform 'Darwin' && confirm 'Set custom macOS defaults?'; then
     defaults write com.apple.LaunchServices LSQuarantine -bool false
   fi
   if confirm '[3/14] Disable smart text features?'; then
-    defaults write NSGlobalDomain KeyRepeat -int 1
-    defaults write NSGlobalDomain InitialKeyRepeat -int 10
+    defaults write NSGlobalDomain KeyRepeat -int 2
+    defaults write NSGlobalDomain InitialKeyRepeat -int 15
     defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
     defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
     defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
@@ -174,7 +174,7 @@ if platform 'Darwin' && confirm 'Set custom macOS defaults?'; then
     sudo defaults write bluetoothaudiod 'Enable AAC codec' -bool true
   fi
   if confirm '[13/14] Increase sleep timeout to 15 minutes?'; then
-    sudo pmset -a displaysleep 15
+    sudo pmset -a displaysleep 15 sleep 15 powernap 0 lidwake 1
   fi
   if confirm '[14/14] Enable HiDPI resolutions?'; then
     sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
