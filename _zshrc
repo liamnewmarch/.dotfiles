@@ -71,8 +71,9 @@ alias dce='docker-compose exec'
 alias dcm='docker-compose exec app python manage.py'
 alias dcr='docker-compose run --rm'
 alias dcu='docker-compose up'
+alias dcub='docker-compose up --build'
 alias de='docker exec -it'
-alias drm='docker container prune -f; docker image prune -f; docker volume prune -f'
+alias drm='docker container prune -f; docker image prune -f; docker volume prune -f; docker network prune -f'
 alias gam='commit -a --amend --no-edit'
 alias gd='git diff -- . ":(exclude)package-lock.json"'
 alias gpuo='git push -u origin $(git rev-parse --abbrev-ref head)'
@@ -87,6 +88,10 @@ alias vi='vim'
 ##
 # Functions
 #
+
+github() {
+  git clone --recurse-submodules git@github.com:${1}.git
+}
 
 mkcd() {
   mkdir -p -- "$1"
@@ -135,3 +140,4 @@ fi
 # Oh my ZSH
 #
 source $ZSH/oh-my-zsh.sh
+unsetopt autocd
