@@ -3,17 +3,17 @@
 #
 
 local pathdirs=(
-    /bin
-    /sbin
-    /usr/bin
-    /usr/sbin
-    /usr/local/bin
-    /usr/local/sbin
-    /usr/local/bin/g4bin
-    /usr/local/git/current/bin
-    $HOME/Library/Python/2.7/bin
-    $HOME/Library/Python/3.7/bin
     $HOME/bin
+    $HOME/Library/Python/3.7/bin
+    $HOME/Library/Python/2.7/bin
+    /usr/local/git/current/bin
+    /usr/local/bin/g4bin
+    /usr/local/sbin
+    /usr/local/bin
+    /usr/sbin
+    /usr/bin
+    /sbin
+    /bin
 )
 
 
@@ -44,11 +44,7 @@ local plugins=(
 # Exports
 #
 
-local pathdirs=($^pathdirs(N))
-for dir in $pathdirs; do
-    export PATH=$dir:$PATH
-done
-
+export PATH=$(echo $pathdirs | tr ' ' ':')
 export EDITOR='vim'
 export HIST_STAMPS="yyyy-mm-dd"
 export PYTHONDONTWRITEBYTECODE="true"
@@ -77,14 +73,17 @@ alias de='docker exec'
 alias dei='docker exec -it'
 alias dr='docker run --rm'
 alias dri='docker run --rm -it'
-alias drm='docker container prune -f; docker image prune -f; docker volume prune -f; docker network prune -f'
+alias drm='docker container prune -f; docker image prune -f; docker volume prune -f; docker network prune -f;'
 alias gam='commit -a --amend --no-edit'
 alias gd='git diff -- . ":(exclude)package-lock.json"'
 alias gpuo='git push -u origin $(git rev-parse --abbrev-ref head)'
 alias gsti='git status --ignored'
 alias gt='glol --since=12pm'
 alias gy='glol --since=yesterday.12pm --until=12pm'
+alias ncdu='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
+alias ping='prettyping --nolegend'
 alias serve='python3 -m http.server'
+alias top='htop'
 alias tree='tree -I node_modules'
 alias vi='vim'
 
