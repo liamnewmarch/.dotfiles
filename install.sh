@@ -33,7 +33,7 @@ if confirm 'Link zsh theme and zshrc file?'; then
   mkdir -p ~/.oh-my-zsh/custom/themes
   echo '[2/2] Link files'
   ln -fs ~/.dotfiles/liam.zsh-theme ~/.oh-my-zsh/custom/themes
-  ln -fs ~/.dotfiles/_zshrc ~/.zshrc
+  ln -fs ~/.dotfiles/.zshrc ~/.zshrc
   echo 'Done'
 fi
 
@@ -61,7 +61,7 @@ fi
 
 if confirm 'Link global gitignore?'; then
   echo '[1/1] Linking file'
-  ln -fs ~/.dotfiles/_gitignore ~/.gitignore
+  ln -fs ~/.dotfiles/.gitignore ~/.gitignore
   echo 'Done'
 fi
 
@@ -69,7 +69,7 @@ if confirm 'Link tmux config?'; then
   echo '[1/2] Installing tmux-themepack'
   git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux/themes/tmux-themepack
   echo '[2/2] Linking file'
-  ln -fs ~/.dotfiles/_tmux.conf ~/.tmux.conf
+  ln -fs ~/.dotfiles/.tmux.conf ~/.tmux.conf
   echo 'Done'
 fi
 
@@ -79,7 +79,7 @@ if confirm 'Link vimrc and install plugins?'; then
   echo '[2/3] Installing ctrlp.vim'
   git clone https://github.com/ctrlpvim/ctrlp.vim ~/.vim/pack/default/start/ctrlp.vim
   echo '[3/3] Linking config file'
-  ln -fs ~/.dotfiles/_vimrc ~/.vimrc
+  ln -fs ~/.dotfiles/.vimrc ~/.vimrc
 fi
 
 if platform 'Darwin' && confirm 'Set custom macOS defaults?'; then
