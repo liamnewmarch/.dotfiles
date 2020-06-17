@@ -66,15 +66,20 @@ if confirm 'Link global gitignore?'; then
 fi
 
 if confirm 'Link tmux config?'; then
-  echo '[1/1] Linking file'
+  echo '[1/2] Installing tmux-themepack'
+  git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux/themes/tmux-themepack
+  echo '[2/2] Linking file'
   ln -fs ~/.dotfiles/_tmux.conf ~/.tmux.conf
   echo 'Done'
 fi
 
-if confirm 'Link vimrc config?'; then
-  echo '[1/1] Linking file'
+if confirm 'Link vimrc and install plugins?'; then
+  echo '[1/3] Installing vim-sensible'
+  git clone https://github.com/tpope/vim-sensible ~/.vim/pack/default/start/vim.sensible
+  echo '[2/3] Installing ctrlp.vim'
+  git clone https://github.com/ctrlpvim/ctrlp.vim ~/.vim/pack/default/start/ctrlp.vim
+  echo '[3/3] Linking config file'
   ln -fs ~/.dotfiles/_vimrc ~/.vimrc
-  echo 'Done'
 fi
 
 if platform 'Darwin' && confirm 'Set custom macOS defaults?'; then
