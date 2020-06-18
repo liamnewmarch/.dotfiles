@@ -10,6 +10,9 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+" Show hidden characters
+set list
+
 " Disable soft tabs when editing Make files
 autocmd FileType make setlocal noexpandtab
 
