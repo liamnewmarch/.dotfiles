@@ -55,8 +55,8 @@ if confirm 'Link zsh theme and zshrc file?'; then
   echo '[1/2] Create ~/bin folder'
   mkdir -p ~/bin
   echo '[2/2] Link files'
-  ln -fs ~/.dotfiles/liam.zsh-theme ~/.oh-my-zsh/custom/themes
-  ln -fs ~/.dotfiles/.zshrc ~/.zshrc
+  ln -fs $(pwd)/liam.zsh-theme ~/.oh-my-zsh/custom/themes
+  ln -fs $(pwd)/.zshrc ~/.zshrc
   echo 'Done'
 fi
 
@@ -78,13 +78,13 @@ fi
 
 if confirm 'Copy iTerm preferences file?'; then
   echo '[1/1] Copying file'
-  cp ~/.dotfiles/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+  cp $(pwd)/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
   echo 'Done'
 fi
 
 if confirm 'Link global gitignore?'; then
   echo '[1/1] Linking file'
-  ln -fs ~/.dotfiles/.gitignore ~/.gitignore
+  ln -fs $(pwd)/.gitignore ~/.gitignore
   echo 'Done'
 fi
 
@@ -92,7 +92,7 @@ if confirm 'Link tmux config?'; then
   echo '[1/2] Installing tmux-themepack'
   github jimeh/tmux-themepack ~/.tmux/themes
   echo '[2/2] Linking file'
-  ln -fs ~/.dotfiles/.tmux.conf ~/.tmux.conf
+  ln -fs ~/$(pwd)/.tmux.conf ~/.tmux.conf
   echo 'Done'
 fi
 
@@ -104,7 +104,7 @@ if confirm 'Link vimrc and install plugins?'; then
     github $plugin $HOME/.vim/pack/custom/start
   done
   echo "[${steps}/${steps}] Linking config file"
-  ln -fs ~/.dotfiles/.vimrc ~/.vimrc
+  ln -fs ~/$(pwd)/.vimrc ~/.vimrc
 fi
 
 if platform 'Darwin' && confirm 'Set custom macOS defaults?'; then
