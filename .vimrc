@@ -19,3 +19,8 @@ autocmd FileType make setlocal noexpandtab
 " Enable mouse support
 set mouse=a
 
+" Vim Better Whitespace plugin
+let g:strip_only_modified_lines=1
+let g:strip_whitelines_at_eof=1
+let g:strip_whitespace_confirm=0
+let g:strip_whitespace_on_save=1

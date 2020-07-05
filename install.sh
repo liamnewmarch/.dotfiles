@@ -1,9 +1,19 @@
-#!/bin/sh
+#!/bin/bash
+
+vim_plugins=(
+  tpope/vim-sensible
+  ctrlpvim/ctrlp.vim
+  dense-analysis/ale
+  airblade/vim-gitgutter
+  junegunn/goyo.vim
+  Yggdroot/indentLine
+  ntpeters/vim-better-whitespace
+)
 
 confirm() {
   read -r -p "${1:-Are you sure?} [y/N] " response
   case "$response" in
-    [yY][eE][sS]|[yY]) 
+    [yY][eE][sS]|[yY])
       true
       ;;
     *)
@@ -12,8 +22,22 @@ confirm() {
   esac
 }
 
+github() {
+  if [ -z "$1" ]; then
+    echo 'Usage: github username/repo [path]'
+    exit 1
+  fi
+  local path="${2:-'.'}/$(echo $1 | cut -d '/' -f2)"
+  if [ -e "$path" ]; then
+    echo "Path $path already exists, updating"
+    git -C $path pull
+  else
+    git clone --depth 1 https://github.com/$1.git $path
+  fi
+}
+
 platform() {
-  if [ "$(uname -s)" = "$1" ]; then true; else false; fi
+  [ "$(uname -s)" = "$1" ]
 }
 
 if platform 'Darwin' && [ -z "$(xcode-select -p)" ] && confirm 'Install Xcode command line tools?'; then
@@ -28,9 +52,8 @@ if confirm 'Install Oh my zsh?'; then
 fi
 
 if confirm 'Link zsh theme and zshrc file?'; then
-  echo '[1/2] Create folders'
+  echo '[1/2] Create ~/bin folder'
   mkdir -p ~/bin
-  mkdir -p ~/.oh-my-zsh/custom/themes
   echo '[2/2] Link files'
   ln -fs ~/.dotfiles/liam.zsh-theme ~/.oh-my-zsh/custom/themes
   ln -fs ~/.dotfiles/.zshrc ~/.zshrc
@@ -67,18 +90,20 @@ fi
 
 if confirm 'Link tmux config?'; then
   echo '[1/2] Installing tmux-themepack'
-  git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux/themes/tmux-themepack
+  github jimeh/tmux-themepack ~/.tmux/themes
   echo '[2/2] Linking file'
   ln -fs ~/.dotfiles/.tmux.conf ~/.tmux.conf
   echo 'Done'
 fi
 
 if confirm 'Link vimrc and install plugins?'; then
-  echo '[1/3] Installing vim-sensible'
-  git clone https://github.com/tpope/vim-sensible ~/.vim/pack/default/start/vim.sensible
-  echo '[2/3] Installing ctrlp.vim'
-  git clone https://github.com/ctrlpvim/ctrlp.vim ~/.vim/pack/default/start/ctrlp.vim
-  echo '[3/3] Linking config file'
+  let steps=$(( ${#vim_plugins[@]} + 1 ))
+  for index in "${!vim_plugins[@]}"; do
+    plugin="${vim_plugins[$index]}"
+    echo "[$(( $index + 1 ))/${steps}] Install ${plugin}"
+    github $plugin $HOME/.vim/pack/custom/start
+  done
+  echo "[${steps}/${steps}] Linking config file"
   ln -fs ~/.dotfiles/.vimrc ~/.vimrc
 fi
 
