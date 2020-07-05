@@ -1,23 +1,25 @@
-## 📁 .dotfiles
+# 📁 .dotfiles
 
-A collection of scripts for macOS that install dotfiles and other useful packages, like Homebrew and Node.
+A collection of config files for various command line tools including Z shell, Vim, Tmux and Git.
 
-#### Usage
+Also sets some of my preferred defaults for macOS, as well as offering to install Xcode CommandLineTools and Homebrew.
 
-First clone this repo to your home directory. Either download and unzip or use git:
+## Installer
 
-```
-git clone https://github.com/liamnewmarch/.dotfiles ~/.dotfiles
-```
-
-Run the standard set of install scripts:
+All the fancy install scripts use cURL these days, if you trust me you can run the following command.
 
 ```
-~/.dotfiles/install.sh
+sh -c "$(curl -fsSL https://liamnewmarch.github.io/.dotfiles)"
 ```
 
-Run a specific install script, e.g. `brew`:
+You’ll need cURL and Git to be installed.
+
+## Git install
+
+The script above is a wrapper around the following commands. You can run them manually if you prefer.
 
 ```
-~/.dotfiles/install.sh brew
+git clone https://github.com/liamnewmarch/.dotfiles.git
+cd .dotfiles
+./install.sh
 ```

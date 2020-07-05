@@ -1,2 +1,27 @@
 #!/bin/bash
-git clone --depth 0 https://github.com/liamnewmarch/.dotfiles.git $HOME/.dotfiles
+
+set -e
+
+exit_with_error() {
+  echo "An error occurred, $1."
+  exit 1
+}
+
+if [ -e "command -v git" ]; then
+  exit_with_error 'Git is not installed'
+
+if [ -d "$HOME/.dotfiles" ]; then
+  # Path already exists, try to update it
+  cd $HOME/.dotfiles
+  git pull --no-rebase
+else
+  # Path doesn’t exist, make a fresh clone
+  git clone --depth 1 https://github.com/liamnewmarch/.dotfiles.git $HOME/.dotfiles
+  cd $HOME/.dotfiles
+fi
+
+if [ -f install.sh ] && [ -x install.sh ]; then
+  ./install.sh
+else
+  exit_with_error '~/.dotfiles/install.sh is not executable'
+fi
