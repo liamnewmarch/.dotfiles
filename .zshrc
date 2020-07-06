@@ -1,3 +1,7 @@
+echo 'LOADED .zshrc'
+
+[ -r "$HOME/.profile" ] && . "$HOME/.profile"
+
 ##
 # $PATH
 #
@@ -24,6 +28,8 @@ local pathdirs=(
 local plugins=(
     brew
     colored-man-pages
+    docker
+    docker-compose
     gcloud
     git
     gitignore
@@ -62,6 +68,7 @@ export ZSH_TMUX_AUTOQUIT='false'
 
 alias chrome='open -a "Google Chrome"'
 alias chrome-as='open -a "Google Chrome" --args --profile-directory'
+alias db='docker build --rm'
 alias dcb='docker-compose build'
 alias dcd='docker-compose down'
 alias dce='docker-compose exec'
@@ -81,6 +88,7 @@ alias gsti='git status --ignored'
 alias gt='glol --since=12pm'
 alias gy='glol --since=yesterday.12pm --until=12pm'
 alias ncdu='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
+alias npminit='echo "{\n  \"private\": true\n}" > package.json'
 alias ping='prettyping --nolegend'
 alias serve='python3 -m http.server'
 alias top='htop'
