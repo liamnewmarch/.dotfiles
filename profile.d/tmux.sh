@@ -3,10 +3,10 @@ _tmux_list_sessions() {
   [ -z "$sessions" ] && return
   local num="$(echo $sessions | wc -l | tr -d '[:space:]')"
   if [ "$num" -eq 1 ]; then
-    printf "There is \033[${COLOR_BLUE}1\033[${COLOR_RESET} active tmux session."
+    echo "\n* There is $(blue "$num") active tmux session.\n"
   else
-    printf "There are \033[${COLOR_BLUE}${num}\033[${COLOR_RESET} active tmux sessions."
+    echo "\n* There are $(blue "$num") active tmux sessions.\n"
   fi
 }
 
-[ -n "$IS_INTERACTIVE" ] && [ -z "$TMUX" ] && printf "\n* $(_tmux_list_sessions)\n\n"
+[ -n "$IS_INTERACTIVE" ] && [ -z "$TMUX" ] && _tmux_list_sessions
