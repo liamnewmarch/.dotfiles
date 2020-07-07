@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DOTFILES_DIR="$(cd "$(dirname "$0")"; pwd -P)"
+
 vim_plugins=(
   tpope/vim-sensible
   ctrlpvim/ctrlp.vim
@@ -36,31 +38,36 @@ github() {
   fi
 }
 
-platform() {
-  [ "$(uname -s)" = "$1" ]
+is_macos() {
+  [ "$(uname -s)" = 'Darwin' ]
 }
 
-if platform 'Darwin' && [ -z "$(xcode-select -p)" ] && confirm 'Install Xcode command line tools?'; then
+if is_macos && [ -z "$(xcode-select -p)" ] && confirm 'Install Xcode command line tools?'; then
   xcode-select --install
 fi
 
-if confirm 'Install Oh my zsh?'; then
-  echo 'Install Oh my zsh'
+if confirm 'Link shell files?'; then
+  echo '[1/3] Link ~/.profile and ~/.profile.d'
+  ln -fs $DOTFILES_DIR/profile $HOME/.profile
+  ln -fs $DOTFILES_DIR/profile.d $HOME/.profile.d
+  echo '[2/3] Link ~/.bashrc and ~/.bash_profile'
+  ln -fs $DOTFILES_DIR/bash_profile $HOME/.bash_profile
+  ln -fs $DOTFILES_DIR/bashrc $HOME/.bashrc
+  echo '[3/3] Link ~/.zshrc'
+  ln -fs $DOTFILES_DIR/zshrc $HOME/.zshrc
+  echo 'Done'
+fi
+
+if confirm 'Install Oh my Zsh?'; then
+  echo '[1/2] Install Oh my zsh'
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   chsh -s $(which zsh)
+  echo '[2/2] Link custom theme'
+  ln -fs $DOTFILES_DIR/liam.zsh-theme $HOME/.oh-my-zsh/custom/themes
   echo 'Done'
 fi
 
-if confirm 'Link zsh theme and zshrc file?'; then
-  echo '[1/2] Create ~/bin folder'
-  mkdir -p ~/bin
-  echo '[2/2] Link files'
-  ln -fs $(pwd)/liam.zsh-theme ~/.oh-my-zsh/custom/themes
-  ln -fs $(pwd)/.zshrc ~/.zshrc
-  echo 'Done'
-fi
-
-if platform 'Darwin' && confirm 'Install Homebrew?'; then
+if is_macos && confirm 'Install Homebrew?'; then
   echo '[1/2] Installing Homebrew'
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   echo '[2/2] Updating Homebrew'
@@ -68,7 +75,7 @@ if platform 'Darwin' && confirm 'Install Homebrew?'; then
   echo 'Done'
 fi
 
-if platform 'Darwin' && confirm 'Install Homebrew packages?'; then
+if is_macos && confirm 'Install Homebrew packages?'; then
   echo '[1/2] Installing ffmpeg, htop, imagemagick, node, python, tldr, tmux, tree and wget'
   brew install ffmpeg htop imagemagick node python tldr tmux tree wget
   echo '[2/2] Installing casks google-cloud-sdk imageoptim '
@@ -76,23 +83,17 @@ if platform 'Darwin' && confirm 'Install Homebrew packages?'; then
   echo 'Done'
 fi
 
-if confirm 'Copy iTerm preferences file?'; then
-  echo '[1/1] Copying file'
-  cp $(pwd)/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
-  echo 'Done'
-fi
-
 if confirm 'Link global gitignore?'; then
   echo '[1/1] Linking file'
-  ln -fs $(pwd)/.gitignore ~/.gitignore
+  ln -fs $DOTFILES_DIR/gitignore $HOME/.gitignore
   echo 'Done'
 fi
 
 if confirm 'Link tmux config?'; then
   echo '[1/2] Installing tmux-themepack'
-  github jimeh/tmux-themepack ~/.tmux/themes
+  github jimeh/tmux-themepack $HOME/.tmux/themes
   echo '[2/2] Linking file'
-  ln -fs ~/$(pwd)/.tmux.conf ~/.tmux.conf
+  ln -fs $DOTFILES_DIR/tmux.conf $HOME/.tmux.conf
   echo 'Done'
 fi
 
@@ -104,10 +105,10 @@ if confirm 'Link vimrc and install plugins?'; then
     github $plugin $HOME/.vim/pack/custom/start
   done
   echo "[${steps}/${steps}] Linking config file"
-  ln -fs ~/$(pwd)/.vimrc ~/.vimrc
+  ln -fs $DOTFILES_DIR/vimrc $HOME/.vimrc
 fi
 
-if platform 'Darwin' && confirm 'Set custom macOS defaults?'; then
+if is_macos && confirm 'Set custom macOS defaults?'; then
   if confirm '[1/14] Expand save and print dialogs?'; then
     defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
     defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
