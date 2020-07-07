@@ -11,5 +11,5 @@ if [ -n "$IS_COLOR" ]; then
   fi
 fi
 
-alias ll='ls -1hAF'
-alias la='ls -hAlF'
+alias ll='ls -1Fhs'
+alias la='ls -AFhl'
