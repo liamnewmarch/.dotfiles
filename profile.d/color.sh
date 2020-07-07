@@ -19,33 +19,33 @@ color() {
 }
 
 black() {
-  echo "$(color "$COLOR_BLACK" "$@")"
+  printf "$(color "$COLOR_BLACK" "$@")"
 }
 
 red() {
-  echo "$(color "$COLOR_RED" "$@")"
+  printf "$(color "$COLOR_RED" "$@")"
 }
 
 green() {
-  echo "$(color "$COLOR_GREEN" "$@")"
+  printf "$(color "$COLOR_GREEN" "$@")"
 }
 
 yellow() {
-  echo "$(color "$COLOR_YELLOW" "$@")"
+  printf "$(color "$COLOR_YELLOW" "$@")"
 }
 
 blue() {
-  echo "$(color "$COLOR_BLUE" "$@")"
+  printf "$(color "$COLOR_BLUE" "$@")"
 }
 
 purple() {
-  echo "$(color "$COLOR_PURPLE" "$@")"
+  printf "$(color "$COLOR_PURPLE" "$@")"
 }
 
 cyan() {
-  echo "$(color "$COLOR_CYAN" "$@")"
+  printf "$(color "$COLOR_CYAN" "$@")"
 }
 
 white() {
-  echo "$(color "$COLOR_WHITE" "$@")"
+  printf "$(color "$COLOR_WHITE" "$@")"
 }

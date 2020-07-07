@@ -3,8 +3,8 @@
 # ~/.profile.d/prompt.sh, but adapted for Zsh.
 
 PROMPT='
-$(date +"%H:%M:%S") $(red "%%(?.."⨯")")
-$(blue "%%3~") $(_prompt_git_branch)
-$(blue "\$") '
+$(date +"%H:%M:%S") %F{red}%(?..⨯)%f
+%F{blue}%3~%f $(_prompt_git_branch)
+%F{blue}\$%f '
 
-PROMPT2='$(blue "…") '
+PROMPT2='%F{blue}…%f'

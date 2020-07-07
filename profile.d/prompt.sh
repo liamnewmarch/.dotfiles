@@ -8,20 +8,24 @@ export PS2='… '
 
 # Simple color prompt
 if [ -n "$IS_COLOR" ]; then
-  export PS1='
+  export PS1="
 \t
 $(blue "\W")
-$(blue "\$") '
-  export PS2='$(blue "…") '
+$(blue "\$") "
+  export PS2="$(blue "…") "
 fi
 
 # Fancy color prompt
-if [ -n "$IS_COLOR" ] && [ -n "$IS_INTERACTIVE" ]; then
-  export PS1='
+if [ -n "$IS_COLOR" ]; then
+  PROMPT_COMMAND=_prompt_command
+fi
+
+_prompt_command() {
+  export PS1="
 \t $(_prompt_error)
 $(blue "\W") $(_prompt_git_branch)
-$(blue "\$") '
-fi
+$(blue "\$") "
+}
 
 _prompt_git_branch() {
   [ -z "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ] && return

@@ -7,7 +7,6 @@ local plugins=(
     docker
     docker-compose
     gcloud
-    git
     gitignore
     man
     node

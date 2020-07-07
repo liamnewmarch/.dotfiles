@@ -1,14 +1,81 @@
-# TODO copy most-used aliases from o-m-z
+# Add
+alias g='git'
+alias ga='git add'
+alias gaa='git add --all'
 
-alias gam='git commit -a --amend --no-edit'
-alias gd='git diff -- . ":(exclude)package-lock.json"'
-alias gpuo='git push -u origin $(git rev-parse --abbrev-ref head)'
-alias gsti='git status --ignored'
+# Branch
+alias gb='git branch'
+alias gba='git branch -a'
 
-# These aliases require o-m-z, broken in bash
+# Commit
+alias gc='git commit -v'
+alias gc!='git commit -v --amend --no-edit'
+alias gca='git commit -v -a'
+alias gca!='git commit -v -a --amend --no-edit'
+
+# Checkout
+alias gcb='git checkout -b'
+alias gco='git checkout'
+alias gcm='git checkout master'
+alias gcs='git checkout staging'
+
+# Clone
+alias gcl='git clone --recurse-submodules'
+
+# Diff
+alias gd='git diff -- ":(exclude)package-lock.json"'
+alias gdw='git diff --word-diff -- ":(exclude)package-lock.json"'
+
+# Fetch
+alias gf='git fetch'
+
+# Pull
+alias gl='git pull'
+
+# Log
+alias gls='git log --stat'
+alias glo='git log --oneline --decorate'
+alias glol="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+alias glog='git log --oneline --decorate --graph'
 alias gt='glol --since=12pm'
 alias gy='glol --since=yesterday.12pm --until=12pm'
 
+# Merge
+alias gm='git merge'
+alias gma='git merge --abort'
+
+# Push
+alias gp='git push'
+alias gpuo='git push -u origin $(git rev-parse --abbrev-ref head)'
+
+# Rebase
+alias grb='git rebase'
+alias grba='git rebase --abort'
+alias grbc='git rebase --continue'
+alias grbi='git rebase -i'
+alias grbs='git rebase --skip'
+alias grbm='git rebase master'
+
+# Remove
+alias grm='git rm'
+alias grmc='git rm --cached'
+
+# Restore
+alias grs='git restore --staged'
+
+# Show
+alias gsh='git show'
+
+# Stash
+alias gsta='git stash push'
+alias gstd='git stash drop'
+alias gstp='git stash pop'
+alias gsts='git stash show --text'
+
+# Status
+alias gst='git status'
+alias gsti='git status --ignored'
+
 github() {
-  git clone --recurse-submodules git@github.com:${1}.git
+  gcl git@github.com:${1}.git
 }
