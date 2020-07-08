@@ -8,6 +8,9 @@ highlight LineNr ctermfg=240
 set colorcolumn=80,100,120
 highlight ColorColumn ctermbg=236
 
+" Disable swap files
+set noswapfile
+
 " Customise tab handling
 set smartindent
 set tabstop=2

@@ -10,6 +10,7 @@ vim_plugins=(
   junegunn/goyo.vim
   Yggdroot/indentLine
   ntpeters/vim-better-whitespace
+  tpope/vim-fugitive
 )
 
 confirm() {
