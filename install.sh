@@ -49,7 +49,7 @@ fi
 if confirm 'Link shell files?'; then
   echo '[1/3] Link ~/.profile and ~/.profile.d'
   ln -fs $DOTFILES_DIR/profile $HOME/.profile
-  ln -fs $DOTFILES_DIR/profile.d $HOME/.profile.d
+  [ ! -d "$HOME/.profile.d" ] && ln -fs $DOTFILES_DIR/profile.d $HOME/.profile.d
   echo '[2/3] Link ~/.bashrc and ~/.bash_profile'
   ln -fs $DOTFILES_DIR/bash_profile $HOME/.bash_profile
   ln -fs $DOTFILES_DIR/bashrc $HOME/.bashrc
