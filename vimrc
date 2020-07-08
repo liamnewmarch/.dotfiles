@@ -4,6 +4,10 @@ set relativenumber
 set numberwidth=6
 highlight LineNr ctermfg=240
 
+" Use coloured columns as line-length guides
+set colorcolumn=80,100,120
+highlight ColorColumn ctermbg=236
+
 " Customise tab handling
 set smartindent
 set tabstop=2
