@@ -1,20 +1,20 @@
 motd() {
-  local name='local'
-  local names=(
-    $NICKNAME
+  local host='localhost'
+  local hostnames=(
+    $HOST_NICKNAME
     ${HOSTNAME%%.*}
     ${HOST%%.*}
   )
-  for n in $names; do
+  for n in $hostnames; do
     if [ -n "$n" ]; then
-      name="$n"
+      host="$n"
       break
     fi
   done
   local session='session'
   local user=${USER:-'user'}
 
-  printf "New $(red "$session") as $(blue "$user") on $(purple "$name")\n"
+  printf "New $(red "$session") as $(blue "$user") on $(purple "$host")\n"
 
   if [ -n "$IS_INTERACTIVE" ] && [ -z "$TMUX" ]; then
     local num_tmux="$(_tmux_num_sessions)"
