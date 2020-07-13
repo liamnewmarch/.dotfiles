@@ -31,3 +31,7 @@ let g:strip_only_modified_lines=1
 let g:strip_whitelines_at_eof=1
 let g:strip_whitespace_confirm=0
 let g:strip_whitespace_on_save=1
+
+" Ctrl+p ignored files
+let g:ctrlp_show_hidden=1
+let g:ctrlp_custom_ignore='\v[\/](\.(DS_Store|git)|node_modules)$'
