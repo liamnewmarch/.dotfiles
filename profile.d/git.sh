@@ -46,7 +46,7 @@ alias gma='git merge --abort'
 
 # Push
 alias gp='git push'
-alias gpuo='git push -u origin $(git rev-parse --abbrev-ref head)'
+alias gpuo='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
 
 # Rebase
 alias grb='git rebase'
