@@ -11,6 +11,7 @@ vim_plugins=(
   Yggdroot/indentLine
   ntpeters/vim-better-whitespace
   tpope/vim-fugitive
+  preservim/nerdtree
 )
 
 confirm() {
