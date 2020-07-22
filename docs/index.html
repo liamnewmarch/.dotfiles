@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
 
 exit_with_error() {
   echo "An error occurred, $1."
@@ -11,18 +11,18 @@ if [ -z "command -v git" ]; then
   exit_with_error 'Git is not installed'
 fi
 
-if [ -d "$HOME/.dotfiles" ]; then
+if [ -d "$DOTFILES_DIR" ]; then
   # Path already exists, try to update it
-  cd $HOME/.dotfiles
+  cd $DOTFILES_DIR
   git pull --no-rebase
 else
   # Path doesn’t exist, make a fresh clone
-  git clone --depth 1 https://github.com/liamnewmarch/.dotfiles.git $HOME/.dotfiles
-  cd $HOME/.dotfiles
+  git clone --depth 1 https://github.com/liamnewmarch/.dotfiles.git $DOTFILES_DIR
+  cd $DOTFILES_DIR
 fi
 
 if [ -f install.sh ] && [ -x install.sh ]; then
   ./install.sh
 else
-  exit_with_error '~/.dotfiles/install.sh is not executable'
+  exit_with_error "${DOTFILES_DIR}/install.sh is not executable"
 fi

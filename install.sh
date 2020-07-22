@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES_DIR="$(cd "$(dirname "$0")"; pwd -P)"
+DOTFILES_DIR="${DOTFILES_DIR:-"$(cd "$(dirname "$0")"; pwd -P)"}"
 
 vim_plugins=(
   tpope/vim-sensible
