@@ -24,7 +24,7 @@ _prompt_command() {
   export PS1="
 \t $(_prompt_error)
 $(blue "\W") $(_prompt_git_branch)
-$(blue "\$") "
+$(yellow "$(_prompt_ssh)")$(blue "\$") "
 }
 
 _prompt_git_branch() {
@@ -37,4 +37,8 @@ _prompt_git_branch() {
 
 _prompt_error() {
   [ $? -ne 0 ] && printf "$(red '⨯')"
+}
+
+_prompt_ssh() {
+  [ -n "$SSH_CLIENT" ] && printf '• '
 }
