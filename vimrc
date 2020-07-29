@@ -1,37 +1,61 @@
-" Enable auto-relative line numbers
+""" General settings
+
+" File handling
+set noswapfile
+set updatetime=300
+
+" Relative line numbers
 set number
 set relativenumber
 set numberwidth=6
-highlight LineNr ctermfg=240
 
-" Use coloured columns as line-length guides
-set colorcolumn=80,100,120
-highlight ColorColumn ctermbg=236
-
-" Disable swap files
-set noswapfile
-
-" Customise tab handling
+" Indentation
 set smartindent
 set tabstop=2
 set shiftwidth=2
 set expandtab
 
-" Show hidden characters
+" Hidden characters
 set list
 
-" Disable soft tabs when editing Make files
-autocmd FileType make setlocal noexpandtab
+" Line length guides
+set colorcolumn=80,100,120
 
-" Enable mouse support
+" Mouse support
 set mouse=a
 
-" Vim Better Whitespace plugin
+
+""" Plugin settings
+
+" Ctrl+p
+let g:ctrlp_show_hidden=1
+let g:ctrlp_custom_ignore='\v[\/](\.(DS_Store|git)|node_modules)$'
+
+" Vim Better Whitespace
 let g:strip_only_modified_lines=1
 let g:strip_whitelines_at_eof=1
 let g:strip_whitespace_confirm=0
 let g:strip_whitespace_on_save=1
 
-" Ctrl+p ignored files
-let g:ctrlp_show_hidden=1
-let g:ctrlp_custom_ignore='\v[\/](\.(DS_Store|git)|node_modules)$'
+
+""" File-specific overrides
+
+" Disable soft tabs when editing Make files
+autocmd FileType make setlocal noexpandtab
+
+
+""" Colors
+
+" GitGutter colors
+highlight! link SignColumn LineNr
+highlight GitGutterAdd ctermfg=2
+highlight GitGutterChange ctermfg=3
+highlight GitGutterDelete ctermfg=1
+
+" Line numbers
+highlight LineNrAbove ctermfg=238
+highlight LineNr      ctermfg=248
+highlight LineNrBelow ctermfg=238
+
+" Line length guides
+highlight ColorColumn ctermbg=236
