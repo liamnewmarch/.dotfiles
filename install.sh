@@ -12,6 +12,7 @@ vim_plugins=(
   ntpeters/vim-better-whitespace
   tpope/vim-fugitive
   preservim/nerdtree
+  editorconfig/editorconfig-vim
 )
 
 confirm() {
