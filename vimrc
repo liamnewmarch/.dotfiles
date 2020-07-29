@@ -43,6 +43,9 @@ let g:strip_whitespace_on_save=1
 " Disable soft tabs when editing Make files
 autocmd FileType make setlocal noexpandtab
 
+" Disable indentLine for JSON files due to incompatibility
+autocmd Filetype json let g:indentLine_enabled=0
+
 
 """ Colors
 
