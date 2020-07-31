@@ -14,7 +14,7 @@ motd() {
   local session='session'
   local user=${USER:-'user'}
 
-  printf "New $(red "$session") as $(blue "$user") on $(purple "$host")\n"
+  printf "New $(red "$session") as $(blue "$user") on $(magenta "$host")\n"
 
   if [ -n "$IS_INTERACTIVE" ] && [ -z "$TMUX" ]; then
     local num_tmux="$(_tmux_num_sessions)"

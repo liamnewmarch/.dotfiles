@@ -1,22 +1,55 @@
-if [ -n "$IS_COLOR" ]; then
-  export COLOR_RESET='0'
-  export COLOR_BLACK='0;30'
-  export COLOR_RED='0;31'
-  export COLOR_GREEN='0;32'
-  export COLOR_YELLOW='0;33'
-  export COLOR_BLUE='01;34'
-  export COLOR_PURPLE='0;35'
-  export COLOR_CYAN='0;36'
-  export COLOR_WHITE='0;37'
-fi
+# Control characters
+# Used in colour escape sequences.
+ASCII_SOH="$(printf "\001")"  # Start of header (unprintable)
+ASCII_SOT="$(printf "\002")"  # Start of text (printable)
+ASCII_ESC="$(printf "\033")"  # Escape
 
-color() {
+
+# Colour variables
+export COLOR_RESET='0'
+export COLOR_BLACK='0;30'
+export COLOR_RED='0;31'
+export COLOR_GREEN='0;32'
+export COLOR_YELLOW='0;33'
+export COLOR_BLUE='01;34'
+export COLOR_MAGENTA='0;35'
+export COLOR_CYAN='0;36'
+export COLOR_WHITE='0;37'
+export COLOR_BRIGHT_BLACK='0;90'
+export COLOR_BRIGHT_RED='0;91'
+export COLOR_BRIGHT_GREEN='0;92'
+export COLOR_BRIGHT_YELLOW='0;93'
+export COLOR_BRIGHT_BLUE='0;94'
+export COLOR_BRIGHT_MAGENTA='0;95'
+export COLOR_BRIGHT_CYAN='0;96'
+export COLOR_BRIGHT_WHITE='0;97'
+
+
+# Prints the given string in a non-printable sequence.
+# Args: (string).
+zeroprint() {
+  printf "%s%s%s" "$ASCII_SOH" "$1" "$ASCII_SOT"
+}
+
+
+# Prints the given colour into a non-printable colour sequence.
+# Args: (colour).
+colorseq() {
   if [ -n "$IS_COLOR" ]; then
-    printf "\001\033[${1}m\002${@:2}\001\033[${COLOR_RESET}m\002"
-  else
-    printf "${@:2}"
+    printf "$(zeroprint "$(printf '%s[%sm' "$ASCII_ESC" "$1")")"
   fi
 }
+
+
+# Prints string(s) in the given colour.
+# Args: (colour, ...strings[])
+color() {
+  printf '%s%s%s' "$(colorseq "$1")" "${@:2}" "$(colorseq "$COLOR_RESET")"
+}
+
+
+# Colour functions – prints string(s) in a specific colour.
+# Args: (...strings[])
 
 black() {
   printf "$(color "$COLOR_BLACK" "$@")"
@@ -38,8 +71,8 @@ blue() {
   printf "$(color "$COLOR_BLUE" "$@")"
 }
 
-purple() {
-  printf "$(color "$COLOR_PURPLE" "$@")"
+magenta() {
+  printf "$(color "$COLOR_MAGENTA" "$@")"
 }
 
 cyan() {
