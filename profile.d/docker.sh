@@ -15,7 +15,7 @@ alias dei='docker exec -it'
 alias dr='docker run --rm'
 alias dri='docker run --rm -it'
 
-function dls() {
+dls() {
   printf "\n$(blue 'Docker containers')\n"
   docker container ls
   printf "\n$(blue 'Docker images')\n"
@@ -26,7 +26,7 @@ function dls() {
   docker network ls
 }
 
-function drm() {
+drm() {
   printf "\n$(red 'Pruning Docker containers')\n"
   docker container prune -f
   printf "\n$(red 'Pruning Docker images')\n"
