@@ -1,7 +1,7 @@
 [ -z "$DOTFILES_BASH_INIT" ] && [ -r "$HOME/.profile" ] && . "$HOME/.profile"
 
 # Prevent double initialisation
-export DOTFILES_BASH_INIT=1
+DOTFILES_BASH_INIT=1
 
 # Disable the bash deprecation warning on macOS
 export BASH_SILENCE_DEPRECATION_WARNING=1
