@@ -50,13 +50,15 @@ if is_macos && [ -z "$(xcode-select -p)" ] && confirm 'Install Xcode command lin
 fi
 
 if confirm 'Link shell files?'; then
-  echo '[1/3] Link ~/.profile and ~/.profile.d'
+  echo '[1/4] Link ~/.profile and ~/.profile.d'
   ln -fs $DOTFILES_DIR/profile $HOME/.profile
   [ ! -d "$HOME/.profile.d" ] && ln -fs $DOTFILES_DIR/profile.d $HOME/.profile.d
-  echo '[2/3] Link ~/.bashrc and ~/.bash_profile'
+  echo '[2/4] Link ~/.inputrc'
+  ln -fs $DOTFILES_DIR/inputrc $HOME/.inputrc
+  echo '[3/4] Link ~/.bashrc and ~/.bash_profile'
   ln -fs $DOTFILES_DIR/bash_profile $HOME/.bash_profile
   ln -fs $DOTFILES_DIR/bashrc $HOME/.bashrc
-  echo '[3/3] Link ~/.zshrc'
+  echo '[4/4] Link ~/.zshrc'
   ln -fs $DOTFILES_DIR/zshrc $HOME/.zshrc
   echo 'Done'
 fi

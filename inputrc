@@ -1,0 +1,20 @@
+$include /etc/inputrc
+
+# Enable coloured output (for bash 4+, ignored otherwise)
+set colored-stats on
+set colored-completion-prefix on
+
+# Up/down keys search history instead of scrolling through
+"\e[A":history-search-backward
+"\e[B":history-search-forward
+
+# Enable menu completion where tab cycles through options
+TAB:menu-complete
+set completion-ignore-case on
+set completion-query-items 200
+set match-hidden-files on
+set mark-symlinked-directories on
+set page-completions on
+set show-all-if-ambiguous on
+set skip-completed-text on
+set visible-stats on
