@@ -23,8 +23,9 @@ alias gcs='git checkout staging'
 alias gcl='git clone --recurse-submodules'
 
 # Diff
-alias gd='git diff -- ":(exclude)package-lock.json"'
-alias gdw='git diff --word-diff -- ":(exclude)package-lock.json"'
+alias gd='git diff'
+alias gda='git diff -- ":(exclude)package-lock.json"'
+alias gdw='git diff --word-diff'
 
 # Fetch
 alias gf='git fetch'
