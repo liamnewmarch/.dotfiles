@@ -29,7 +29,7 @@ $(yellow "$(_prompt_ssh)")$(blue "\$") "
 
 _prompt_git_branch() {
   [ -z "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ] && return
-  local branch="$(git symbolic-ref --short HEAD)"
+  local branch=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
   local modified="$(git status --porcelain | wc -l | tr -d '[:space:]')"
   printf "⌥ $(green "$branch")"
   [ $modified -gt 0 ] && printf " ($(red "$modified"))"
