@@ -20,9 +20,9 @@ motd() {
     local num_tmux="$(_tmux_num_sessions)"
     [ -z "$num_tmux" ] || [ $num_tmux -eq 0 ] && return
     if [ $num_tmux -eq 1 ]; then
-      printf "\n* There is $(blue '1') active tmux session\n"
+      printf "\n$(yellow '•') There is $(blue '1') active tmux session\n"
     else
-      printf "\n* There are $(blue "$num_tmux") active tmux sessions\n"
+      printf "\n$(yellow '•') There are $(blue "$num_tmux") active tmux sessions\n"
     fi
   fi
 }
