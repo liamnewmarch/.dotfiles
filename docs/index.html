@@ -7,18 +7,18 @@ exit_with_error() {
   exit 1
 }
 
-if [ -z "command -v git" ]; then
+if ! command -v git 2>&1 /dev/null; then
   exit_with_error 'Git is not installed'
 fi
 
 if [ -d "$DOTFILES_DIR" ]; then
   # Path already exists, try to update it
-  cd $DOTFILES_DIR
+  cd "$DOTFILES_DIR" || exit
   git pull --no-rebase
 else
   # Path doesn’t exist, make a fresh clone
-  git clone --depth 1 https://github.com/liamnewmarch/.dotfiles.git $DOTFILES_DIR
-  cd $DOTFILES_DIR
+  git clone --depth 1 https://github.com/liamnewmarch/.dotfiles.git "$DOTFILES_DIR"
+  cd "$DOTFILES_DIR" || exit
 fi
 
 if [ -f install.sh ] && [ -x install.sh ]; then

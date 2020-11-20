@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES_DIR="${DOTFILES_DIR:-"$(cd "$(dirname "$0")"; pwd -P)"}"
+DOTFILES_DIR="${DOTFILES_DIR:-"$(cd "$(dirname "$0")" || exit; pwd -P)"}"
 
 vim_plugins=(
   tpope/vim-sensible
@@ -28,16 +28,18 @@ confirm() {
 }
 
 github() {
+  local path
   if [ -z "$1" ]; then
+    echo 'Download (clone) or update (pull) a GitHub repo to a local folder.'
     echo 'Usage: github username/repo [path]'
     exit 1
   fi
-  local path="${2:-'.'}/$(echo $1 | cut -d '/' -f2)"
+  path="${2:-'.'}/$(echo "$1" | cut -d '/' -f2)"
   if [ -e "$path" ]; then
     echo "Path $path already exists, updating"
-    git -C $path pull
+    git -C "$path" pull
   else
-    git clone --depth 1 https://github.com/$1.git $path
+    git clone --depth 1 "https://github.com/$1.git" "$path"
   fi
 }
 
@@ -51,66 +53,74 @@ fi
 
 if confirm 'Link shell files?'; then
   echo '[1/4] Link ~/.profile and ~/.profile.d'
-  ln -fs $DOTFILES_DIR/profile $HOME/.profile
-  [ ! -d "$HOME/.profile.d" ] && ln -fs $DOTFILES_DIR/profile.d $HOME/.profile.d
+  ln -fs "$DOTFILES_DIR/files/.profile" "$HOME"
+  [ ! -d "$HOME/.profile.d" ] && ln -fs "$DOTFILES_DIR/files/.profile.d" "$HOME"
   echo '[2/4] Link ~/.inputrc'
-  ln -fs $DOTFILES_DIR/inputrc $HOME/.inputrc
+  ln -fs "$DOTFILES_DIR/files/.inputrc" "$HOME"
   echo '[3/4] Link ~/.bashrc and ~/.bash_profile'
-  ln -fs $DOTFILES_DIR/bash_profile $HOME/.bash_profile
-  ln -fs $DOTFILES_DIR/bashrc $HOME/.bashrc
+  ln -fs "$DOTFILES_DIR/files/.bash_profile" "$HOME"
+  ln -fs "$DOTFILES_DIR/files/.bashrc" "$HOME"
   echo '[4/4] Link ~/.zshrc'
-  ln -fs $DOTFILES_DIR/zshrc $HOME/.zshrc
+  ln -fs "$DOTFILES_DIR/files/.zshrc" "$HOME"
   echo 'Done'
 fi
 
 if confirm 'Install Oh my Zsh?'; then
   echo '[1/2] Install Oh my zsh'
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-  chsh -s $(which zsh)
+  if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    chsh -s "$(which zsh)"
+  else
+    echo 'Skipping, Oh my Zsh already installed.'
+  fi
   echo '[2/2] Link custom theme'
-  ln -fs $DOTFILES_DIR/liam.zsh-theme $HOME/.oh-my-zsh/custom/themes
+  ln -fs "$DOTFILES_DIR/files/.oh-my-zsh/custom/themes/liam.zsh-theme" "$HOME/.oh-my-zsh/custom/themes"
   echo 'Done'
 fi
 
 if is_macos && confirm 'Install Homebrew?'; then
-  echo '[1/2] Installing Homebrew'
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  echo '[2/2] Updating Homebrew'
-  brew update
+  echo '[1/1] Installing Homebrew'
+  if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  else
+    echo 'Skipping, Homebrew is already installed.'
+  fi
   echo 'Done'
 fi
 
 if is_macos && confirm 'Install Homebrew packages?'; then
-  echo '[1/2] Installing ffmpeg, htop, imagemagick, node, python, tldr, tmux, tree and wget'
-  brew install ffmpeg htop imagemagick node python tldr tmux tree wget
-  echo '[2/2] Installing casks google-cloud-sdk imageoptim '
+  echo '[1/3] Updating Homebrew'
+  brew update
+  echo '[2/3] Installing ffmpeg, git, htop, imagemagick, node, python, shellcheck, tldr, tmux, tree and wget'
+  brew install ffmpeg git htop imagemagick node python shellcheck tldr tmux tree wget
+  echo '[3/3] Installing casks google-chrome, google-cloud-sdk, imageoptim, iterm2 and visual-studio-code'
   brew cask install google-chrome google-cloud-sdk imageoptim iterm2 visual-studio-code
   echo 'Done'
 fi
 
 if confirm 'Link global gitignore?'; then
   echo '[1/1] Linking file'
-  ln -fs $DOTFILES_DIR/gitignore $HOME/.gitignore
+  ln -fs "$DOTFILES_DIR/files/.gitignore" "$HOME"
   echo 'Done'
 fi
 
 if confirm 'Link tmux config?'; then
   echo '[1/2] Installing tmux-themepack'
-  github jimeh/tmux-themepack $HOME/.tmux/themes
+  github jimeh/tmux-themepack "$HOME/.tmux/themes"
   echo '[2/2] Linking file'
-  ln -fs $DOTFILES_DIR/tmux.conf $HOME/.tmux.conf
+  ln -fs "$DOTFILES_DIR/files/.tmux.conf" "$HOME"
   echo 'Done'
 fi
 
 if confirm 'Link vimrc and install plugins?'; then
-  let steps=$(( ${#vim_plugins[@]} + 1 ))
+  steps=$(( ${#vim_plugins[@]} + 1 ))
   for index in "${!vim_plugins[@]}"; do
     plugin="${vim_plugins[$index]}"
-    echo "[$(( $index + 1 ))/${steps}] Install ${plugin}"
-    github $plugin $HOME/.vim/pack/custom/start
+    echo "[$(( index + 1 ))/${steps}] Install ${plugin}"
+    github "$plugin" "$HOME/.vim/pack/custom/start"
   done
   echo "[${steps}/${steps}] Linking config file"
-  ln -fs $DOTFILES_DIR/vimrc $HOME/.vimrc
+  ln -fs "$DOTFILES_DIR/files/.vimrc" "$HOME"
 fi
 
 if is_macos && confirm 'Set custom macOS defaults?'; then

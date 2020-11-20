@@ -5,7 +5,8 @@ alias serve='python3 -m http.server'
 
 # Previously $IS_MACOS but you never know…
 if [ -d "$HOME/Library/Python" ]; then
-  for python in $HOME/Library/Python/*; do
-    export PATH="$python/bin:$PATH"
+  for python_path in "$HOME/Library/Python/"*; do
+    export PATH="$python_path/bin:$PATH"
   done
+  unset python_path
 fi

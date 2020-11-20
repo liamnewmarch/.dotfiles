@@ -1,7 +1,7 @@
 [ -z "$DOTFILES_BASH_INIT" ] && [ -r "$HOME/.profile" ] && . "$HOME/.profile"
 
 # Prevent double initialisation
-DOTFILES_BASH_INIT=1
+export DOTFILES_BASH_INIT=1
 
 # Disable the bash deprecation warning on macOS
 export BASH_SILENCE_DEPRECATION_WARNING=1
@@ -13,6 +13,6 @@ shopt -s nocaseglob
 # Load Homebrew bash completions if available
 if [ -r /usr/local/etc/bash_completion.d ]; then
   for file in /usr/local/etc/bash_completion.d/*; do
-    source $file
+    . "$file"
   done
 fi

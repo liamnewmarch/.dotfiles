@@ -36,7 +36,7 @@ zeroprint() {
 # Args: (colour).
 colorseq() {
   if [ -n "$IS_COLOR" ]; then
-    printf "$(zeroprint "$(printf '%s[%sm' "$ASCII_ESC" "$1")")"
+    printf '%s' "$(zeroprint "$(printf '%s[%sm' "$ASCII_ESC" "$1")")"
   fi
 }
 
@@ -44,7 +44,8 @@ colorseq() {
 # Prints string(s) in the given colour.
 # Args: (colour, ...strings[])
 color() {
-  printf '%s%s%s' "$(colorseq "$1")" "${@:2}" "$(colorseq "$COLOR_RESET")"
+  color=$1; shift
+  printf '%s%s%s' "$(colorseq "$color")" "$@" "$(colorseq "$COLOR_RESET")"
 }
 
 
@@ -52,33 +53,33 @@ color() {
 # Args: (...strings[])
 
 black() {
-  printf "$(color "$COLOR_BLACK" "$@")"
+  printf '%s' "$(color "$COLOR_BLACK" "$@")"
 }
 
 red() {
-  printf "$(color "$COLOR_RED" "$@")"
+  printf '%s' "$(color "$COLOR_RED" "$@")"
 }
 
 green() {
-  printf "$(color "$COLOR_GREEN" "$@")"
+  printf '%s' "$(color "$COLOR_GREEN" "$@")"
 }
 
 yellow() {
-  printf "$(color "$COLOR_YELLOW" "$@")"
+  printf '%s' "$(color "$COLOR_YELLOW" "$@")"
 }
 
 blue() {
-  printf "$(color "$COLOR_BLUE" "$@")"
+  printf '%s' "$(color "$COLOR_BLUE" "$@")"
 }
 
 magenta() {
-  printf "$(color "$COLOR_MAGENTA" "$@")"
+  printf '%s' "$(color "$COLOR_MAGENTA" "$@")"
 }
 
 cyan() {
-  printf "$(color "$COLOR_CYAN" "$@")"
+  printf '%s' "$(color "$COLOR_CYAN" "$@")"
 }
 
 white() {
-  printf "$(color "$COLOR_WHITE" "$@")"
+  printf '%s' "$(color "$COLOR_WHITE" "$@")"
 }

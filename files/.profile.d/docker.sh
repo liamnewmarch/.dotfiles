@@ -17,23 +17,23 @@ alias dri='docker run --rm -it'
 alias drun='docker run -e USER="$(id -u)" -u="$(id -u)" -w /usr/src/app -v $(pwd):/usr/src/app --rm -it'
 
 dls() {
-  printf "\n$(blue 'Docker containers')\n"
+  printf '\n%s\n' "$(blue 'Docker containers')"
   docker container ls
-  printf "\n$(blue 'Docker images')\n"
+  printf '\n%s\n' "$(blue 'Docker images')"
   docker image ls
-  printf "\n$(blue 'Docker volumes')\n"
+  printf '\n%s\n' "$(blue 'Docker volumes')"
   docker volume ls
-  printf "\n$(blue 'Docker networks')\n"
+  printf '\n%s\n' "$(blue 'Docker networks')"
   docker network ls
 }
 
 drm() {
-  printf "\n$(red 'Pruning Docker containers')\n"
+  printf '\n%s\n' "$(red 'Pruning Docker containers')"
   docker container prune -f
-  printf "\n$(red 'Pruning Docker images')\n"
+  printf '\n%s\n' "$(red 'Pruning Docker images')"
   docker image prune -f
-  printf "\n$(red 'Pruning Docker volumes')\n"
+  printf '\n%s\n' "$(red 'Pruning Docker volumes')"
   docker volume prune -f
-  printf "\n$(red 'Pruning Docker networks')\n"
+  printf '\n%s\n' "$(red 'Pruning Docker networks')"
   docker network prune -f
 }

@@ -78,5 +78,5 @@ alias gst='git status'
 alias gsti='git status --ignored'
 
 github() {
-  gcl git@github.com:${1}.git
+  gcl git@github.com:"${1}.git"
 }
