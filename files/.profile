@@ -43,9 +43,9 @@ for file in \
   top \
   tree \
   vim \
-  motd \
   platform \
   'local' \
+  motd \
 ; do
   [ -r "$HOME/.profile.d/$file.sh" ] && . "$HOME/.profile.d/$file.sh"
 done
