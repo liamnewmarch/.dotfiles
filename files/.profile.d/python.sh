@@ -1,3 +1,4 @@
+export CLOUDSDK_PYTHON='python2'
 export PYTHONDONTWRITEBYTECODE='true'
 export VIRTUALENVWRAPPER_PYTHON='/usr/local/bin/python3'
 

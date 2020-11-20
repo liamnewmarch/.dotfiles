@@ -28,7 +28,7 @@ export COLOR_BRIGHT_WHITE='0;97'
 # Prints the given string in a non-printable sequence.
 # Args: (string).
 zeroprint() {
-  printf "%s%s%s" "$ASCII_SOH" "$1" "$ASCII_SOT"
+  printf '%s%s%s' "$ASCII_SOH" "$1" "$ASCII_SOT"
 }
 
 
