@@ -77,6 +77,10 @@ alias gsts='git stash show --text'
 alias gst='git status'
 alias gsti='git status --ignored'
 
+# Switch
+alias gsw='git switch'
+alias gswc='git switch --create'
+
 github() {
   gcl git@github.com:"${1}.git"
 }
