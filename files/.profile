@@ -39,6 +39,7 @@ for file in \
   npm \
   prompt \
   python \
+  rust \
   tmux \
   top \
   tree \
