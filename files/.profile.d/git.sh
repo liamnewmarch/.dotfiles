@@ -61,8 +61,12 @@ alias grbm='git rebase master'
 alias grm='git rm'
 alias grmc='git rm --cached'
 
+# Reset
+alias grs='git reset'
+
 # Restore
-alias grs='git restore --staged'
+alias grss='git restore --staged'
+alias grsw='git restore --worktree'
 
 # Show
 alias gsh='git show'
