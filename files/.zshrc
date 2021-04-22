@@ -16,7 +16,6 @@ export plugins=(
     pip
     python
     tmux
-    virtualenvwrapper
 )
 
 # Oh-my-Zsh specific variables
