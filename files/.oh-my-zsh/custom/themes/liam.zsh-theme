@@ -4,7 +4,7 @@
 
 PROMPT='
 $(date +"%H:%M:%S") %F{red}%(?..⨯)%f
-%F{blue}%3~%f $(_prompt_git_branch)
-%F{yellow}$(_prompt_ssh)%f%F{blue}\$%f '
+%F{yellow}$(_prompt_ssh)%f%F{blue}%3~%f$(_prompt_git_branch)
+$(_prompt_virtualenv)%F{blue}\$%f '
 
 PROMPT2='%F{blue}…%f'
