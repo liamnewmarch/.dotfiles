@@ -17,7 +17,7 @@ if [ -d "$DOTFILES_DIR" ]; then
   git pull --no-rebase
 else
   # Path doesn’t exist, make a fresh clone
-  git clone --depth 1 https://github.com/liamnewmarch/.dotfiles.git "$DOTFILES_DIR"
+  git clone --depth 1 https://github.com/liamnewmarch/dotfiles.git "$DOTFILES_DIR"
   cd "$DOTFILES_DIR" || exit
 fi
 
