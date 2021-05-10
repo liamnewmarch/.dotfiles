@@ -1,8 +1,6 @@
 motd() {
   host='localhost'
-  # shellcheck disable=SC2153
   [ -n "$HOST" ] && host="$HOST"
-  # shellcheck disable=SC2039
   [ -n "$HOSTNAME" ] && host="$HOSTNAME"
   [ -n "$HOST_NICKNAME" ] && host="$HOST_NICKNAME"
   session='session'

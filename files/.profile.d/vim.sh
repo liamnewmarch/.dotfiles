@@ -1,4 +1,4 @@
-if [ -e "$(command -v vim)" ]; then
+if command -v vim >/dev/null; then
   export EDITOR='vim'
   alias vi='vim'
 fi
