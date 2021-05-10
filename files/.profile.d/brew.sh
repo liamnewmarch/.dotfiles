@@ -1,44 +1,73 @@
-# Homebrew paths (from `brew doctor`)
-HOMEBREW_PATHS='/usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc'
+_zsh_emulate() {
+  # Run zsh emulate without breaking other shells
+  type emulate >/dev/null 2>/dev/null && emulate "${1:-zsh}"
+}
 
-alias brew-update='brew_update'
+_brew_fix() {
+  # Find where Homebrew is installed, relative paths obtained from `brew doctor`
+  _brew_prefix=$(brew --prefix)
+  _brew_relative_paths='bin etc sbin share share/doc'
 
-brew_update() {
-  # First check with brew doctor
-  printf '%s\n' "$(white 'Running') $(magenta 'brew doctor')"
-  brew doctor
+  # Warn the user that we need to use sudo
+  printf 'Claiming ownership of paths in %s (requires sudo)\n' "$(blue "$_brew_prefix")"
 
-  # If there was a non-zero exit status offer to fix paths
-  # shellcheck disable=SC2181
-  if [ $? -ne 0 ]; then
-    printf '\n%s\n' "$(yellow 'Warning:') $(white 'non-zero exit status from') $(magenta 'brew doctor')"
+  # Make zsh behave like sh for this part
+  _zsh_emulate sh
+  _brew_paths=$(for p in $_brew_relative_paths; do echo "$_brew_prefix/$p"; done)
+  _zsh_emulate
+
+  echo "$_brew_paths" | xargs sudo chown -R "$(whoami)"
+  echo "$_brew_paths" | xargs chmod u+w
+  unset _brew_paths _brew_prefix _brew_relative_paths
+  printf '%s\n' "$(green 'Success')"
+}
+
+_brew_full_upgrade() {
+  printf 'Running %s\n' "$(magenta 'brew doctor')"
+
+  # Offer to fix folder permissions if `brew doctor` exits with non-zero status
+  if ! brew doctor; then
+    printf '\n%s non-zero exit status from %s\n' "$(yellow 'Warning:')" "$(magenta 'brew doctor')"
     printf 'Attempt to fix homebrew paths? [Y/n/q] '
     read -r yn
     case $yn in
       [Yy]*|'' )
-        # Warn the user we need to use sudo
-        printf '%s\n' "$(white 'Claiming ownership of paths in') $(blue "/usr/local/") (requires sudo)"
-        echo "$HOMEBREW_PATHS" | xargs -n 1 sudo chown -R "$(whoami)"
-        echo "$HOMEBREW_PATHS" | xargs -n 1 chmod u+w
+        printf '\n'  # For consistency with future commands
+        brew fix
         ;;
       [Nn]* )
-        printf '%s\n' "$(white 'Continuing')"
+        printf 'Continuing\n'
         ;;
       [Qq]*|* )
         printf '%s\n' "$(red 'Aborted')"
-        return
+        return 1
         ;;
     esac
   fi
 
   # Run the main brew update command
-  printf '\n%s\n' "$(white 'Running') $(magenta 'brew upgrade')"
+  printf '\nRunning %s\n' "$(magenta 'brew upgrade')"
   brew upgrade
 
-  # Clean up after with brew cleanup
-  printf '%s\n' "$(white 'Running') $(magenta 'brew cleanup')"
+  # Clean up files with brew cleanup
+  printf '\nRunning %s\n' "$(magenta 'brew cleanup')"
   brew cleanup --prune=all -s
 
   # We done
   printf '%s\n' "$(green 'Success')"
+}
+
+brew() {
+  case "$1" in
+    fix )
+      _brew_fix
+      ;;
+    full-upgrade )
+      _brew_full_upgrade
+      ;;
+    * )
+      command brew "$@"
+      ;;
+  esac
+  return $?
 }
